@@ -1,6 +1,8 @@
-import 'package:dashboard_app/constants.dart';
+import 'package:dashboard_app/Constants/constants.dart';
+import 'package:dashboard_app/Provider/data.dart';
 import 'package:dashboard_app/responsive_layout.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class DrawerPage extends StatefulWidget {
 
@@ -41,28 +43,45 @@ List<ButtonInfo> _buttonNames = [
     icon: Icons.verified_user ),
     ButtonInfo (
     title: "Users",
-    icon: Icons.supervised_user_circle_rounded )
+    icon: Icons.supervised_user_circle_rounded ),
+    ButtonInfo (
+    title: "Logout",
+    icon: Icons.logout)
 ];
 
 class _DrawerPageState extends State<DrawerPage> {
   @override
   Widget build(BuildContext context) {
+
+    bool darkMode = Provider.of<Data>(context).isDark;
+
     return  Drawer(
       child: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(Constants.kPadding),
           child: Column(
             children: [
+              const SizedBox(height: 30,),
               ListTile(
-            title:const Text('Admin Menu', style: TextStyle(color: Colors.white),),
+            title: Text('Admin Menu', 
+            style: TextStyle(
+              color: darkMode 
+              ? const Color(0xff131215)
+              : const Color.fromARGB(255, 237, 237, 237), 
+            fontSize: 20, fontWeight: FontWeight.bold),),
             trailing: ResponsiveLayout.isComputer(context) ? null : 
             IconButton(
               onPressed: (){
               Navigator.pop(context);
             }, 
-            icon: const Icon(Icons.close, color: Colors.white),
+            icon: Icon(Icons.close, color: 
+            darkMode 
+              ? const Color(0xff131215)
+              : Colors.white 
+              ),
             ),
           ),
+          const SizedBox(height: 10,),
               ...List.generate(
             _buttonNames.length, (index) => Column(
             children: [
@@ -71,16 +90,22 @@ class _DrawerPageState extends State<DrawerPage> {
                   borderRadius: BorderRadius.circular(20),
                   gradient: LinearGradient(
                     colors: [
-                      Constants.redDark.withOpacity(0.9),
-                     Constants.orangeDark.withOpacity(0.9),
+                      Constants.pink.withOpacity(0.9),
+                     Constants.yellow.withOpacity(0.9),
                      ]
                 ),
               ) : null,
               child: ListTile(
-                title: Text(_buttonNames[index].title, style: const TextStyle(color: Colors.white),),
+                title: Text(_buttonNames[index].title, 
+                style: TextStyle(color: darkMode 
+              ? const Color(0xff131215)
+              : Colors.white),),
                 leading:  Padding(
                   padding: const EdgeInsets.all(Constants.kPadding),
-                  child: Icon(_buttonNames[index].icon,color: Colors.white,),
+                  child: Icon(_buttonNames[index].icon,
+                  color: darkMode 
+              ? const Color(0xff131215)
+              : Colors.white),
                   ),
                   onTap: () {
                     setState(() {
@@ -90,7 +115,11 @@ class _DrawerPageState extends State<DrawerPage> {
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
               ),
               ),
-              const Divider(color: Colors.white, thickness: 0.1,)
+               Divider(color: 
+              darkMode 
+              ? const Color(0xff131215)
+              : Colors.white
+              , thickness: 0.1,)
             ],
           ),growable: true)
             ],

@@ -1,12 +1,14 @@
-import 'package:dashboard_app/app_bar/app_bar_widget.dart';
-import 'package:dashboard_app/constants.dart';
-import 'package:dashboard_app/drawer/drawer_page.dart';
-import 'package:dashboard_app/panel_center/panel_center_page.dart';
-import 'package:dashboard_app/panel_left/panel_left_page.dart';
-import 'package:dashboard_app/panel_right/panel_right_page.dart';
+import 'package:dashboard_app/Components/app_bar/app_bar_widget.dart';
+import 'package:dashboard_app/Constants/constants.dart';
+import 'package:dashboard_app/Components/drawer/drawer_page.dart';
+import 'package:dashboard_app/Components/panel_center/panel_center_page.dart';
+import 'package:dashboard_app/Components/panel_left/panel_left_page.dart';
+import 'package:dashboard_app/Components/panel_right/panel_right_page.dart';
+import 'package:dashboard_app/Provider/data.dart';
 import 'package:dashboard_app/responsive_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:provider/provider.dart';
 
 class WidgetTree extends StatefulWidget {
   const WidgetTree({super.key});
@@ -27,6 +29,7 @@ class _WidgetTreeState extends State<WidgetTree> {
 
   @override
   Widget build(BuildContext context) {
+    bool darkMode = Provider.of<Data>(context).isDark;
     return Scaffold(
       appBar: PreferredSize(preferredSize: const Size(double.infinity, 70),
       child: (ResponsiveLayout.isTinyHeightLimit(context) || 
@@ -55,9 +58,11 @@ class _WidgetTreeState extends State<WidgetTree> {
       drawer: DrawerPage(),
       bottomNavigationBar: ResponsiveLayout.isPhone(context) 
       ? CurvedNavigationBar(
+          //color: darkMode ? Constants.purpleDark : Constants.purpleLight ,
+          color: const Color(0xFFF5F8FF),
           items: _icons, 
           index: _currentIndex,
-          backgroundColor: Constants.purpleDark,
+          backgroundColor: darkMode ? Colors.white :Constants.purpleDark,
           onTap: (index) {
             setState(() {
               _currentIndex = index;

@@ -1,6 +1,8 @@
-import 'package:dashboard_app/constants.dart';
+import 'package:dashboard_app/Constants/constants.dart';
+import 'package:dashboard_app/Provider/data.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class LineChartSample2 extends StatefulWidget {
   const LineChartSample2({super.key});
@@ -19,6 +21,7 @@ class _LineChartSample2State extends State<LineChartSample2> {
 
   @override
   Widget build(BuildContext context) {
+    bool darkMode = Provider.of<Data>(context).isDark;
     return Padding(
       padding:const EdgeInsets.only(
                   left: Constants.kPadding / 2,
@@ -26,10 +29,26 @@ class _LineChartSample2State extends State<LineChartSample2> {
                   top: Constants.kPadding,
                   bottom: Constants.kPadding,),
       child: Card(
-        color: Constants.purpleLight,
+        color: darkMode ? Colors.white : Constants.purpleLight,
         elevation: 3,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        child: Stack(
+        child: Column(
+          children: [
+             Padding(
+                padding: const EdgeInsets.only(
+                  left: Constants.kPadding * 1.5,
+                  right: Constants.kPadding / 2,
+                  top: Constants.kPadding * 2,
+                ),
+                child: Text(
+                  'Line Chart',
+                  style: TextStyle(
+                      color: darkMode ? Constants.purpleLight : Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18),
+                ),
+              ),
+              Stack(
           children: <Widget>[
             AspectRatio(
               aspectRatio: 1.70,
@@ -65,6 +84,10 @@ class _LineChartSample2State extends State<LineChartSample2> {
             ),
           ],
         ),
+          ],
+        )
+        
+        
       ),
     );
   }

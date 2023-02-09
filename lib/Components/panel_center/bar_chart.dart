@@ -1,7 +1,9 @@
 
-import 'package:dashboard_app/constants.dart';
+import 'package:dashboard_app/Constants/constants.dart';
+import 'package:dashboard_app/Provider/data.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class BarChartSample2 extends StatefulWidget {
   const BarChartSample2({super.key});
@@ -49,6 +51,7 @@ class BarChartSample2State extends State<BarChartSample2> {
 
   @override
   Widget build(BuildContext context) {
+    bool darkMode = Provider.of<Data>(context).isDark;
     return Padding(
       padding: const EdgeInsets.only(
                 left: Constants.kPadding / 2,
@@ -59,7 +62,7 @@ class BarChartSample2State extends State<BarChartSample2> {
         aspectRatio: 1,
         child: Card(
           elevation: 3,
-          color: Constants.purpleLight,
+          color: darkMode ? Colors.white : Constants.purpleLight,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
           child: Padding(
             padding: const EdgeInsets.all(16),
@@ -69,13 +72,15 @@ class BarChartSample2State extends State<BarChartSample2> {
                 Row(
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
-                    makeTransactionsIcon(),
+                    makeTransactionsIcon(darkMode),
                     const SizedBox(
                       width: 15,
                     ),
-                    const Text(
+                     Text(
                       'Monthly Profits',
-                      style: TextStyle(color: Colors.white, fontSize: 16),
+                      style: TextStyle(color: 
+                      darkMode ? Constants.purpleLight : Colors.white,
+                      fontSize: 16),
                     ),
                     const Spacer(),
                      const Text(
@@ -92,19 +97,22 @@ class BarChartSample2State extends State<BarChartSample2> {
                     const SizedBox(width: 50,),
                      const Text(
                       'Of ',
-                      style: TextStyle(color: Colors.white, fontSize: 14),
+                      style: TextStyle(color: Color(0xff77839a), fontSize: 14
+                      ,fontWeight: FontWeight.bold),
                     ),
                      Text(
                       'Sales',
                       style: TextStyle(color: widget.leftBarColor, fontSize: 15),
                     ),
                      const Text(
-                      'And ',
-                      style: TextStyle(color: Color(0xff77839a), fontSize: 14),
+                      ' And ',
+                      style: TextStyle(color: Color(0xff77839a), fontSize: 14
+                      ),
                     ),
                      Text(
                       'Orders',
-                      style: TextStyle(color: widget.rightBarColor, fontSize: 15),
+                      style: TextStyle(color: widget.rightBarColor, fontSize: 15
+                      ,fontWeight: FontWeight.bold),
                     ),
                   ],
                 ),
@@ -266,7 +274,7 @@ class BarChartSample2State extends State<BarChartSample2> {
     );
   }
 
-  Widget makeTransactionsIcon() {
+  Widget makeTransactionsIcon(bool darkMode) {
     const width = 4.5;
     const space = 3.5;
     return Row(
@@ -275,7 +283,7 @@ class BarChartSample2State extends State<BarChartSample2> {
         Container(
           width: width,
           height: 10,
-          color: Colors.white.withOpacity(0.4),
+          color: darkMode ? Constants.purpleLight.withOpacity(0.4) : Colors.white.withOpacity(0.4),
         ),
         const SizedBox(
           width: space,
@@ -283,7 +291,7 @@ class BarChartSample2State extends State<BarChartSample2> {
         Container(
           width: width,
           height: 28,
-          color: Colors.white.withOpacity(0.8),
+          color: darkMode ? Constants.purpleLight.withOpacity(0.8) : Colors.white.withOpacity(0.8),
         ),
         const SizedBox(
           width: space,
@@ -291,7 +299,7 @@ class BarChartSample2State extends State<BarChartSample2> {
         Container(
           width: width,
           height: 42,
-          color: Colors.white.withOpacity(1),
+          color: darkMode ? Constants.purpleLight.withOpacity(1) : Colors.white.withOpacity(1),
         ),
         const SizedBox(
           width: space,
@@ -299,7 +307,7 @@ class BarChartSample2State extends State<BarChartSample2> {
         Container(
           width: width,
           height: 28,
-          color: Colors.white.withOpacity(0.8),
+          color: darkMode ? Constants.purpleLight.withOpacity(0.8) : Colors.white.withOpacity(0.8),
         ),
         const SizedBox(
           width: space,
@@ -307,7 +315,7 @@ class BarChartSample2State extends State<BarChartSample2> {
         Container(
           width: width,
           height: 10,
-          color: Colors.white.withOpacity(0.4),
+          color: darkMode ? Constants.purpleLight.withOpacity(0.4) : Colors.white.withOpacity(0.4),
         ),
       ],
     );

@@ -1,6 +1,8 @@
-import 'package:dashboard_app/constants.dart';
+import 'package:dashboard_app/Constants/constants.dart';
+import 'package:dashboard_app/Provider/data.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class _LineChart extends StatelessWidget {
   const _LineChart({required this.isShowingMainData});
@@ -307,6 +309,7 @@ class LineChartSample1State extends State<LineChartSample1> {
 
   @override
   Widget build(BuildContext context) {
+    bool lightMode = Provider.of<Data>(context).isDark;
     return Padding(
       padding: const EdgeInsets.only(
                 left: Constants.kPadding / 2,
@@ -317,7 +320,7 @@ class LineChartSample1State extends State<LineChartSample1> {
         aspectRatio: 1.23,
         child: Card(
           elevation: 3,
-          color: Constants.purpleLight,
+          color: lightMode ? Colors.white : Constants.purpleLight,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
           child: Stack(
             children: <Widget>[
@@ -327,10 +330,10 @@ class LineChartSample1State extends State<LineChartSample1> {
                   const SizedBox(
                     height: 37,
                   ),
-                  const Text(
+                   Text(
                     'Monthly Sales',
                     style: TextStyle(
-                      color:  Color(0xFF50E4FF),
+                      color:lightMode ? Constants.purpleLight : Colors.white,
                       fontSize: 25,
                       fontWeight: FontWeight.bold,
                       letterSpacing: 2,
@@ -354,7 +357,7 @@ class LineChartSample1State extends State<LineChartSample1> {
               IconButton(
                 icon: Icon(
                   Icons.refresh,
-                  color: Colors.white.withOpacity(isShowingMainData ? 1.0 : 0.5),
+                  color: lightMode ? Constants.purpleLight.withOpacity(isShowingMainData ? 1.0 : 0.5) : Colors.white.withOpacity(isShowingMainData ? 1.0 : 0.5),
                 ),
                 onPressed: () {
                   setState(() {

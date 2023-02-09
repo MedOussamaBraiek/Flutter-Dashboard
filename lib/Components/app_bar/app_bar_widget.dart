@@ -1,6 +1,8 @@
-import 'package:dashboard_app/constants.dart';
+import 'package:dashboard_app/Constants/constants.dart';
+import 'package:dashboard_app/Provider/data.dart';
 import 'package:dashboard_app/responsive_layout.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class AppBarWidget extends StatefulWidget {
   const AppBarWidget({super.key});
@@ -18,8 +20,10 @@ int _currentSelectedButton = 0;
 class _AppBarWidgetState extends State<AppBarWidget> {
   @override
   Widget build(BuildContext context) {
+    bool darkMode = Provider.of<Data>(context).isDark;
     return Container(
-      color: Constants.purpleLight,
+      //padding: const EdgeInsets.only(top:30 ),
+      color: darkMode ? Colors.white : Constants.purpleLight,
       child: Row(children: [
         if(ResponsiveLayout.isComputer(context))
           Container(
@@ -31,13 +35,13 @@ class _AppBarWidgetState extends State<AppBarWidget> {
                   //color: Colors.black45,
                   offset: Offset(0,0),
                   spreadRadius: 1,
-                  blurRadius: 10
+                  blurRadius: 3
                 )
               ],
                shape: BoxShape.circle,
             ),
-            child: const CircleAvatar(
-              backgroundColor: Constants.purpleDark,
+            child: const  CircleAvatar(
+              backgroundColor:  Constants.purpleDark,
               radius: 30,
               backgroundImage: AssetImage("assets/images/logo.png"),
             )
@@ -47,7 +51,7 @@ class _AppBarWidgetState extends State<AppBarWidget> {
               Scaffold.of(context).openDrawer();
             }, 
             iconSize: 30,
-            color: Colors.white,
+            color: darkMode ? Constants.purpleDark : Colors.white,
             icon: const Icon(Icons.menu),
             ),
             const SizedBox(width:Constants.kPadding,),
@@ -66,8 +70,8 @@ class _AppBarWidgetState extends State<AppBarWidget> {
                     Text(_buttonNames[index], 
                       style: TextStyle(
                       color: _currentSelectedButton == index 
-                      ? Colors.white 
-                      : Colors.white70
+                      ? darkMode ? Constants.purpleLight : Colors.white 
+                      : darkMode ? Constants.purpleDark : Colors.white70
                       ),
                     ),
                     Container(
@@ -95,7 +99,9 @@ class _AppBarWidgetState extends State<AppBarWidget> {
                   children: [
                     Text(
                       _buttonNames[_currentSelectedButton],
-                      style: const TextStyle(color: Colors.white), 
+                      style: TextStyle(color: 
+                       darkMode ? Constants.purpleLight : Colors.white
+                      ), 
                     ),
                     Container(
                       margin: const EdgeInsets.all(Constants.kPadding / 2),
@@ -112,11 +118,16 @@ class _AppBarWidgetState extends State<AppBarWidget> {
                 ],)
                 ),
                 const Spacer(),
+                Switch(value: darkMode,
+                 onChanged: ((value) {
+                   Provider.of<Data>(context, listen: false).changeMode();
+                 })
+                 ),
                 IconButton(
                   onPressed: () {}, 
                   icon: const Icon(Icons.search),
                   iconSize: 30,
-                  color: Colors.white,
+                  color: darkMode ? Constants.purpleLight : Colors.white,
                   ),
                 Stack(
                   children: [
@@ -124,7 +135,7 @@ class _AppBarWidgetState extends State<AppBarWidget> {
                       onPressed: () {}, 
                       icon: const Icon(Icons.notifications_none_outlined),
                       iconSize: 30,
-                      color: Colors.white,
+                      color: darkMode ? Constants.purpleLight : Colors.white,
                       ),
                       const Positioned(
                         right: 6,
@@ -149,7 +160,7 @@ class _AppBarWidgetState extends State<AppBarWidget> {
                           BoxShadow(
                             offset: Offset(0,0),
                             spreadRadius: 1,
-                            blurRadius: 10
+                            blurRadius: 3
                           )
                         ],
                         shape: BoxShape.circle,
