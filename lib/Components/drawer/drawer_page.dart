@@ -1,5 +1,6 @@
 import 'package:dashboard_app/Constants/constants.dart';
 import 'package:dashboard_app/Provider/data.dart';
+import 'package:dashboard_app/Services/auth.dart';
 import 'package:dashboard_app/responsive_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -110,6 +111,7 @@ class _DrawerPageState extends State<DrawerPage> {
                   onTap: () {
                     setState(() {
                       _currentIndex = index;
+                      index == _buttonNames.length - 1 ? Auth().signOut() : null;
                     });
                   },
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),

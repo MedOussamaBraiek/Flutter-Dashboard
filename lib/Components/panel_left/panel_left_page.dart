@@ -3,6 +3,7 @@ import 'package:dashboard_app/Components/panel_left/circle_graph.dart';
 import 'package:dashboard_app/Components/panel_left/curved_chart.dart';
 import 'package:dashboard_app/Provider/data.dart';
 import 'package:dashboard_app/responsive_layout.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:provider/provider.dart';
@@ -33,6 +34,7 @@ class _PanelLeftPageState extends State<PanelLeftPage> {
   @override
   Widget build(BuildContext context) {
     bool darkMode = Provider.of<Data>(context).isDark;
+    final user = FirebaseAuth.instance.currentUser!;
     return Scaffold(
       body: Stack(
         children: [
@@ -60,7 +62,7 @@ class _PanelLeftPageState extends State<PanelLeftPage> {
                       top: Constants.kPadding * 2,
                       bottom: Constants.kPadding * 2),
                   child: Text(
-                    "Hello,  Oussama",
+                    "Hello,  ${user.email!.substring(0, user.email!.indexOf('@'))}",
                     style: TextStyle(
                         color: darkMode
                             ? const Color(0xff131215)

@@ -8,6 +8,16 @@ class Data extends ChangeNotifier {
   late MyThemePreferences _preferences;
   bool get isDark => _isDark;
 
+  bool isLogged = false;
+
+  void login() {
+    isLogged = true;
+  }
+
+  void logout() {
+    isLogged = false;
+  }
+
   ModelTheme() {
     _isDark = true;
     _preferences = MyThemePreferences();

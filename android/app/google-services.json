@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "828253710512",
+    "project_id": "mi-chatbot-30d81",
+    "storage_bucket": "mi-chatbot-30d81.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:828253710512:android:e1e880ca3207cbba2bf375",
+        "android_client_info": {
+          "package_name": "com.example.dashboard_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "828253710512-idgld691u4k3mb35jvabjuqnd3akptlp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC0vUD8pJMYkthH1p8An_9mE92AhMJk_WM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "828253710512-idgld691u4k3mb35jvabjuqnd3akptlp.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "828253710512-urrpd31mq1gs6gd2aha2smr2iunubcn6.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.dashboardApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

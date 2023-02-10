@@ -1,10 +1,17 @@
 import 'package:dashboard_app/Constants/constants.dart';
+import 'package:dashboard_app/Pages/signup.dart';
 import 'package:dashboard_app/Provider/data.dart';
+import 'package:dashboard_app/firebase_options.dart';
 import 'package:dashboard_app/widget_tree.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() {
+Future<void> main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
 
@@ -20,6 +27,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
+final navigatorKey = GlobalKey<NavigatorState>();
 
 class DarklightTheme extends StatefulWidget {
   const DarklightTheme({Key? key}) : super(key: key);
@@ -34,6 +42,8 @@ class _DarklightThemeState extends State<DarklightTheme> {
     bool darkMode = Provider.of<Data>(context).isDark;
     print(darkMode);
     return MaterialApp(
+      //scaffoldMessengerKey: Utils.messengerKey,
+      navigatorKey: navigatorKey,
       debugShowCheckedModeBanner: false,
       title: 'Dashboard',
       theme: ThemeData(
