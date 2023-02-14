@@ -1,21 +1,13 @@
-import 'package:dashboard_app/Components/app_bar/app_bar_widget.dart';
-import 'package:dashboard_app/Constants/constants.dart';
-import 'package:dashboard_app/Components/drawer/drawer_page.dart';
-import 'package:dashboard_app/Components/panel_center/panel_center_page.dart';
-import 'package:dashboard_app/Components/panel_left/panel_left_page.dart';
-import 'package:dashboard_app/Components/panel_right/panel_right_page.dart';
 import 'package:dashboard_app/Pages/Home.dart';
 import 'package:dashboard_app/Pages/auth_page.dart';
-import 'package:dashboard_app/Pages/login.dart';
 import 'package:dashboard_app/Provider/data.dart';
 import 'package:dashboard_app/Services/auth.dart';
-import 'package:dashboard_app/responsive_layout.dart';
 import 'package:flutter/material.dart';
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:provider/provider.dart';
 
 class WidgetTree extends StatefulWidget {
   const WidgetTree({super.key});
+  static const String id = '/';
 
   @override
   State<WidgetTree> createState() => _WidgetTreeState();

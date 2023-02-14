@@ -25,6 +25,7 @@ class _AppBarWidgetState extends State<AppBarWidget> {
       //padding: const EdgeInsets.only(top:30 ),
       color: darkMode ? Colors.white : Constants.purpleLight,
       child: Row(children: [
+        if(isLogged) 
         if (ResponsiveLayout.isComputer(context))
           Container(
               margin: const EdgeInsets.all(Constants.kPadding),
@@ -126,7 +127,7 @@ class _AppBarWidgetState extends State<AppBarWidget> {
               )),
         const Spacer(),
         Padding(
-          padding: !isLogged ? const EdgeInsets.only(top: 40) : const EdgeInsets.all(0),
+          padding: !isLogged ? const EdgeInsets.only(top: 20) : const EdgeInsets.all(0),
           child: SizedBox(
             height: 50,
             width: 70,

@@ -24,12 +24,12 @@ List<ButtonInfo> _buttonNames = [
   ButtonInfo (
     title: "Home",
     icon: Icons.home ),
-    ButtonInfo (
-    title: "Settign",
-    icon: Icons.settings ),
-    ButtonInfo (
-    title: "Notifications",
-    icon: Icons.notifications ),
+    // ButtonInfo (
+    // title: "Settign",
+    // icon: Icons.settings ),
+    // ButtonInfo (
+    // title: "Notifications",
+    // icon: Icons.notifications ),
     ButtonInfo (
     title: "Contacts",
     icon: Icons.contact_phone_rounded ),
@@ -37,14 +37,14 @@ List<ButtonInfo> _buttonNames = [
     title: "Sales",
     icon: Icons.sell ),
     ButtonInfo (
-    title: "Marketing",
-    icon: Icons.mark_email_read ),
+    title: "Profits",
+    icon: Icons.money ),
     ButtonInfo (
-    title: "Security",
-    icon: Icons.verified_user ),
+    title: "Devices",
+    icon: Icons.settings ),
     ButtonInfo (
-    title: "Users",
-    icon: Icons.supervised_user_circle_rounded ),
+    title: "Tasks",
+    icon: Icons.task ),
     ButtonInfo (
     title: "Logout",
     icon: Icons.logout)
@@ -55,8 +55,10 @@ class _DrawerPageState extends State<DrawerPage> {
   Widget build(BuildContext context) {
 
     bool darkMode = Provider.of<Data>(context).isDark;
+    var data = Provider.of<Data>(context);
 
     return  Drawer(
+      //width: MediaQuery.of(context).size.width * 0.3,
       child: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(Constants.kPadding),
@@ -112,6 +114,12 @@ class _DrawerPageState extends State<DrawerPage> {
                     setState(() {
                       _currentIndex = index;
                       index == _buttonNames.length - 1 ? Auth().signOut() : null;
+                      _currentIndex == 0 ? data.setHome() : null;
+                      _currentIndex == 1 ? data.setUsers() : null;
+                      _currentIndex == 2 ? data.setSales() : null;
+                      _currentIndex == 3 ? data.setProfits() : null;
+                      _currentIndex == 4 ? data.setDevices() : null;
+                      _currentIndex == 5 ? data.setTasks() : null;
                     });
                   },
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),

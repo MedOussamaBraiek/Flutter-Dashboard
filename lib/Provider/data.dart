@@ -9,14 +9,83 @@ class Data extends ChangeNotifier {
   bool get isDark => _isDark;
 
   bool isLogged = false;
+  bool snapshot = false;
+
+  bool isSales = false;
+  bool isProfits = false;
+  bool isUsers = false;
+  bool isDevices = false;
+  bool isTasks = false;
 
   void login() {
     isLogged = true;
+    notifyListeners();
   }
 
   void logout() {
     isLogged = false;
+    notifyListeners();
   }
+
+  void setSnapshot() {
+    snapshot = !snapshot;
+    notifyListeners();
+  }
+
+  void setHome() {
+    isSales = false;
+    isProfits = false;
+    isDevices = false;
+    isUsers = false;
+    isTasks = false;
+    notifyListeners();
+  }
+
+  void setSales() {
+    isSales = true;
+    isProfits = false;
+    isDevices = false;
+    isUsers = false;
+    isTasks = false;
+    notifyListeners();
+  }
+
+  void setProfits() {
+    isProfits = true;
+    isSales = false;
+    isDevices = false;
+    isUsers = false;
+    isTasks = false;
+    notifyListeners();
+  }
+
+  void setDevices() {
+    isProfits = false;
+    isSales = false;
+    isDevices = true;
+    isUsers = false;
+    isTasks = false;
+    notifyListeners();
+  }
+
+  void setUsers() {
+    isProfits = false;
+    isSales = false;
+    isDevices = false;
+    isUsers = true;
+    isTasks = false;
+    notifyListeners();
+  }
+
+  void setTasks() {
+    isProfits = false;
+    isSales = false;
+    isDevices = false;
+    isUsers = false;
+    isTasks = true;
+    notifyListeners();
+  }
+
 
   ModelTheme() {
     _isDark = true;
