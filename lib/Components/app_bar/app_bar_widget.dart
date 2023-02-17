@@ -30,6 +30,8 @@ class _AppBarWidgetState extends State<AppBarWidget> {
        user = current;
     }
 
+    print(user);
+
     return Container(
       //padding: const EdgeInsets.only(top:30 ),
       color: darkMode ? Colors.white : Constants.purpleLight,
@@ -137,7 +139,7 @@ class _AppBarWidgetState extends State<AppBarWidget> {
               )),
         const Spacer(),
         Padding(
-          padding: !isLogged ? const EdgeInsets.only(top: 20) : const EdgeInsets.all(0),
+          padding: !isLogged ? const EdgeInsets.only(top: 30) : const EdgeInsets.all(0),
           child: SizedBox(
             height: 50,
             width: 70,
@@ -205,16 +207,17 @@ class _AppBarWidgetState extends State<AppBarWidget> {
             user?.photoURL == null && isLogged ? 
             CircleAvatar(
                   radius: 20,
-                  backgroundColor: Constants.yellow.withOpacity(0.9),
+                  //backgroundColor: Constants.yellow.withOpacity(0.9),
+                  backgroundImage: const AssetImage("assets/images/oussama.jpeg"),
                   child: Text(
-                    user?.displayName.substring(0, 1) ?? "M",
+                    user?.displayName.substring(0, 1) ?? user.email.substring(0,1),
                     style: const TextStyle(color: Colors.white),
                   ),
                 )
             
             : CircleAvatar(
               radius: 20,
-              backgroundImage: NetworkImage(user.photoURL!),
+              backgroundImage:NetworkImage(user.photoURL!) ,
             ),
             
             // const CircleAvatar(
