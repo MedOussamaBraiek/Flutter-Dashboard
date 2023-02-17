@@ -35,6 +35,7 @@ class _PanelLeftPageState extends State<PanelLeftPage> {
   Widget build(BuildContext context) {
     bool darkMode = Provider.of<Data>(context).isDark;
     final user = FirebaseAuth.instance.currentUser!;
+    
     return Scaffold(
       body: Stack(
         children: [
@@ -62,6 +63,7 @@ class _PanelLeftPageState extends State<PanelLeftPage> {
                       top: Constants.kPadding * 2,
                       bottom: Constants.kPadding * 2),
                   child: Text(
+                    user.displayName != null ? "Hello, ${user.displayName}" :
                     "Hello,  ${user.email!.substring(0, user.email!.indexOf('@'))}",
                     style: TextStyle(
                         color: darkMode

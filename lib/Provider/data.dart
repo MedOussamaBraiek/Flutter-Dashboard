@@ -2,6 +2,8 @@
 import 'package:dashboard_app/Provider/mytheme_preferences.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class Data extends ChangeNotifier {
   late bool _isDark = true;
@@ -16,6 +18,8 @@ class Data extends ChangeNotifier {
   bool isUsers = false;
   bool isDevices = false;
   bool isTasks = false;
+
+  //late GoogleService googleSignIn;
 
   void login() {
     isLogged = true;
@@ -110,3 +114,32 @@ class Data extends ChangeNotifier {
     notifyListeners();
   }
 }
+
+// class GoogleService extends ChangeNotifier{
+
+//   final googleSignIn = GoogleSignIn();
+
+//   GoogleSignInAccount? _user;
+
+//   GoogleSignInAccount get user => _user!;
+
+
+//   Future googleLogin() async {
+
+//     final googleUser = await googleSignIn.signIn();
+//     if(googleUser == null) return;
+//     _user = googleUser;
+
+//     final googleAuth = await googleUser.authentication;
+
+//     final credential = GoogleAuthProvider.credential(
+//       accessToken: googleAuth.accessToken,
+//       idToken: googleAuth.idToken,
+//     );
+
+//     await FirebaseAuth.instance.signInWithCredential(credential);
+
+//     notifyListeners();
+//   }
+
+// }

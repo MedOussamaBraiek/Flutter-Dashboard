@@ -1,6 +1,8 @@
 import 'package:dashboard_app/Constants/constants.dart';
 import 'package:dashboard_app/Provider/data.dart';
+import 'package:dashboard_app/Services/auth.dart';
 import 'package:dashboard_app/responsive_layout.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:day_night_switcher/day_night_switcher.dart';
@@ -21,10 +23,18 @@ class _AppBarWidgetState extends State<AppBarWidget> {
   Widget build(BuildContext context) {
     bool darkMode = Provider.of<Data>(context).isDark;
     var isLogged = Provider.of<Data>(context).isLogged;
+
+    var user;
+    final current = FirebaseAuth.instance.currentUser;
+    if (current != null) {
+       user = current;
+    }
+
     return Container(
       //padding: const EdgeInsets.only(top:30 ),
       color: darkMode ? Colors.white : Constants.purpleLight,
       child: Row(children: [
+        //TextButton(onPressed: (){Auth().signOut();}, child: Text('logout')),
         if(isLogged) 
         if (ResponsiveLayout.isComputer(context))
           Container(
@@ -44,8 +54,8 @@ class _AppBarWidgetState extends State<AppBarWidget> {
                 backgroundColor: Constants.purpleDark,
                 radius: 30,
                 backgroundImage: AssetImage("assets/images/logo.png"),
-              ))
-        else
+              )),
+        
          if(isLogged) 
           IconButton(
             onPressed: () {
@@ -191,9 +201,25 @@ class _AppBarWidgetState extends State<AppBarWidget> {
               ],
               shape: BoxShape.circle,
             ),
-            child: const CircleAvatar(
-                radius: 22,
-                backgroundImage: AssetImage("assets/images/oussama.jpeg")),
+            child: 
+            user?.photoURL == null && isLogged ? 
+            CircleAvatar(
+                  radius: 20,
+                  backgroundColor: Constants.yellow.withOpacity(0.9),
+                  child: Text(
+                    user?.displayName.substring(0, 1) ?? "M",
+                    style: const TextStyle(color: Colors.white),
+                  ),
+                )
+            
+            : CircleAvatar(
+              radius: 20,
+              backgroundImage: NetworkImage(user.photoURL!),
+            ),
+            
+            // const CircleAvatar(
+            //     radius: 22,
+            //     backgroundImage: AssetImage("assets/images/oussama.jpeg")),
           )
       ]),
     );

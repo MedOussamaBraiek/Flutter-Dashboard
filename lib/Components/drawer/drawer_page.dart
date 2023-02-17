@@ -1,6 +1,7 @@
 import 'package:dashboard_app/Constants/constants.dart';
 import 'package:dashboard_app/Provider/data.dart';
 import 'package:dashboard_app/Services/auth.dart';
+import 'package:dashboard_app/Services/google_auth.dart';
 import 'package:dashboard_app/responsive_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -56,6 +57,8 @@ class _DrawerPageState extends State<DrawerPage> {
 
     bool darkMode = Provider.of<Data>(context).isDark;
     var data = Provider.of<Data>(context);
+
+    final provider = Provider.of<GoogleService>(context, listen: false);
 
     return  Drawer(
       //width: MediaQuery.of(context).size.width * 0.3,
@@ -113,7 +116,13 @@ class _DrawerPageState extends State<DrawerPage> {
                   onTap: () {
                     setState(() {
                       _currentIndex = index;
-                      index == _buttonNames.length - 1 ? Auth().signOut() : null;
+                      index == _buttonNames.length - 1 ? 
+                      {Auth().signOut(),
+                      provider.logout(),
+                      data.logout()
+                       }
+                      
+                      : null;
                       _currentIndex == 0 ? data.setHome() : null;
                       _currentIndex == 1 ? data.setUsers() : null;
                       _currentIndex == 2 ? data.setSales() : null;

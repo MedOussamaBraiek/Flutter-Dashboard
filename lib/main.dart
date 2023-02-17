@@ -1,6 +1,6 @@
 import 'package:dashboard_app/Constants/constants.dart';
-import 'package:dashboard_app/Pages/signup.dart';
 import 'package:dashboard_app/Provider/data.dart';
+import 'package:dashboard_app/Services/google_auth.dart';
 import 'package:dashboard_app/firebase_options.dart';
 import 'package:dashboard_app/widget_tree.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +12,16 @@ Future<void> main() async{
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(const MyApp());
+  runApp(
+    // MultiProvider(
+    //   providers: [
+    //     Provider<Data>(create: (context) => Data()),
+    //     Provider<GoogleService>(create: (context) => GoogleService()),
+    //   ],
+    //   child: const MyApp(),
+    //  ),
+      const MyApp(),
+     );
 }
 
 class MyApp extends StatelessWidget {
@@ -22,8 +31,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (BuildContext context) => Data(),
-      child: const DarklightTheme(),
+      child: ChangeNotifierProvider(
+        create: (BuildContext context) => GoogleService(),
+        child: const DarklightTheme(),
+      )
+      
     );
+
+     //return DarklightTheme();
   }
 }
 

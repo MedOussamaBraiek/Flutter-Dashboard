@@ -12,7 +12,6 @@ import 'package:dashboard_app/Pages/tasks.dart';
 import 'package:dashboard_app/Pages/users.dart';
 import 'package:dashboard_app/Provider/data.dart';
 import 'package:dashboard_app/responsive_layout.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

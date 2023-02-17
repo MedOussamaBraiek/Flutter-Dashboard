@@ -126,81 +126,85 @@ class _SingUpPageState extends State<SingUpPage> {
         padding: const EdgeInsets.all(20),
         child: Form(
           key: formKey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              _title(), 
-              const SizedBox(height: 24,),
-              _subTitle(),
-              const SizedBox(height: 20,),
-              TextFormField(
-                style: TextStyle(color:lighMode ? Constants.purpleLight : Colors.white, fontSize:14 ),
-                controller: _controllerEmail,
-                textInputAction: TextInputAction.next,
-                decoration: InputDecoration(
-                  labelText: 'Email',
-                  labelStyle: TextStyle(color:lighMode ? Constants.purpleLight : Colors.white )
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                _title(), 
+                const SizedBox(height: 24,),
+                _subTitle(),
+                const SizedBox(height: 20,),
+                TextFormField(
+                  style: TextStyle(color:lighMode ? Constants.purpleLight : Colors.white, fontSize:14 ),
+                  controller: _controllerEmail,
+                  textInputAction: TextInputAction.next,
+                  decoration: InputDecoration(
+                    labelText: 'Email',
+                    labelStyle: TextStyle(color:lighMode ? Constants.purpleLight : Colors.white )
+                  ),
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  validator: (email) => 
+                    email != null && !EmailValidator.validate(email)
+                    ? 'Enter a valid email'
+                    : null,
                 ),
-                autovalidateMode: AutovalidateMode.onUserInteraction,
-                validator: (email) => 
-                  email != null && !EmailValidator.validate(email)
-                  ? 'Enter a valid email'
-                  : null,
-              ),
-              const SizedBox(height: 4,),
-              TextFormField(
-                style: TextStyle(color:lighMode ? Constants.purpleLight : Colors.white, fontSize:14 ),
-                controller: _controllerPassword,
-                textInputAction: TextInputAction.next,
-                decoration: InputDecoration(
-                  labelText: 'Password',
-                  labelStyle: TextStyle(color:lighMode ? Constants.purpleLight : Colors.white )
+                const SizedBox(height: 4,),
+                TextFormField(
+                  style: TextStyle(color:lighMode ? Constants.purpleLight : Colors.white, fontSize:14 ),
+                  controller: _controllerPassword,
+                  textInputAction: TextInputAction.next,
+                  decoration: InputDecoration(
+                    labelText: 'Password',
+                    labelStyle: TextStyle(color:lighMode ? Constants.purpleLight : Colors.white )
+                  ),
+                  obscureText: true,
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  validator: (value) => 
+                    value != null && value.length < 6
+                    ? 'Passwords must be at least 6 characters'
+                    : null,
                 ),
-                obscureText: true,
-                autovalidateMode: AutovalidateMode.onUserInteraction,
-                validator: (value) => 
-                  value != null && value.length < 6
-                  ? 'Passwords must be at least 6 characters'
-                  : null,
-              ),
-              const SizedBox(height: 20,),
-              ElevatedButton.icon(
-                style: ElevatedButton.styleFrom(
-                  minimumSize: const Size.fromHeight(50),
-                ),
-                onPressed: (){
-                  signUp();
-                  data.login();
-                  }, 
-                icon: const Icon(Icons.lock_open, size: 32,), 
-                label: const Text('Sign up',
-                style: TextStyle(fontSize: 24),)),
-              // _entryField('email', _controllerEmail),
-              // _entryField('password', _controllerPassword),
-              // _errorMessage(),
-              // _submitButton(),
-              // _loginOrRegisterButton(),
-              const SizedBox(height: 24,),
-              RichText(
-                text:  TextSpan(
-                  style:  TextStyle(color:lighMode ? Constants.purpleLight : Colors.white, fontSize: 14),
-                  text: "Already Have an account?  ",
-                  children: [
-                    TextSpan(
-                      recognizer: TapGestureRecognizer()
-                      ..onTap = widget.onClickedSignIn,
-                      text: 'Logi In',
-                      style: TextStyle(
-                        decoration: TextDecoration.underline,
-                        color:lighMode ? Constants.purpleLight : Colors.white
-                        
+                const SizedBox(height: 20,),
+                ElevatedButton.icon(
+                  style: ElevatedButton.styleFrom(
+                    primary: Constants.yellow.withOpacity(0.9),
+                    minimumSize: const Size.fromHeight(50),
+                  ),
+                  onPressed: (){
+                    signUp();
+                    data.login();
+                    }, 
+                  
+                  icon: const Icon(Icons.lock_open, size: 32,), 
+                  label: const Text('Sign up',
+                  style: TextStyle(fontSize: 24),)),
+                // _entryField('email', _controllerEmail),
+                // _entryField('password', _controllerPassword),
+                // _errorMessage(),
+                // _submitButton(),
+                // _loginOrRegisterButton(),
+                const SizedBox(height: 24,),
+                RichText(
+                  text:  TextSpan(
+                    style:  TextStyle(color:lighMode ? Constants.purpleLight : Colors.white, fontSize: 14),
+                    text: "Already Have an account?  ",
+                    children: [
+                      TextSpan(
+                        recognizer: TapGestureRecognizer()
+                        ..onTap = widget.onClickedSignIn,
+                        text: 'Logi In',
+                        style: TextStyle(
+                          decoration: TextDecoration.underline,
+                          color:lighMode ? Constants.purpleLight : Colors.white
+                          
+                        )
                       )
-                    )
-                  ]
-                )
-                )
-              ]
+                    ]
+                  )
+                  )
+                ]
+            ),
           ),
         ),
       ),
